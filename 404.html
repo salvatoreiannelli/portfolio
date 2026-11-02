@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<title>Pagina non trovata — Salvatore Iannelli</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body{background:#0C0C0E;color:#F2F0EC;font-family:"Jost","Avenir Next",system-ui,Arial,sans-serif;display:flex;min-height:100vh;align-items:center;justify-content:center;margin:0;text-align:center;padding:24px;line-height:1.6}
+a{color:#F0B38A}
+p{margin:0 0 8px}
+</style>
+</head>
+<body>
+<div>
+  <p>Questa pagina non esiste.</p>
+  <p><a id="home" href="/">Torna al sito</a></p>
+</div>
+<script>
+(function(){
+  var seg=location.pathname.split("/").filter(Boolean);
+  var base="/";
+  if(/\.github\.io$/.test(location.hostname)&&seg.length>1){base="/"+seg[0]+"/";}
+  document.getElementById("home").setAttribute("href",base);
+})();
+</script>
+</body>
+</html>

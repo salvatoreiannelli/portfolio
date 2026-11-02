@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Salvatore Iannelli — Filmmaker e video editor</title>
+<meta name="description" content="Salvatore Iannelli, filmmaker e video editor. Campagne per brand di moda, film editoriali e documentari. Napoli.">
+<link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="img/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="img/favicon-180.png">
+<meta name="theme-color" content="#0C0C0E">
+<!-- Anteprima quando il link viene condiviso. Quando passerai a un dominio tuo, cambia solo l'indirizzo nelle due righe og:url e og:image. -->
+<meta property="og:type" content="website">
+<meta property="og:locale" content="it_IT">
+<meta property="og:site_name" content="Salvatore Iannelli">
+<meta property="og:title" content="Salvatore Iannelli — Filmmaker e video editor">
+<meta property="og:description" content="Campagne per marchi di moda, film editoriali e documentari. Napoli.">
+<meta property="og:url" content="https://salvatoreiannelli.github.io/portfolio/">
+<meta property="og:image" content="https://salvatoreiannelli.github.io/portfolio/img/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+/* Layout: marchio centrato e barra di categorie sottile; showreel a tutta larghezza; fila orizzontale di ultimi lavori; tre sezioni (Brand, Editoriali, Documentari). */
+:root{
+  --bg:#0C0C0E;
+  --panel:#151518;
+  --ink:#F2F0EC;
+  --muted:#A19EA7;
+  --line:#26262B;
+  --accent:#F0B38A;
+  --font:"Jost","Futura","Century Gothic","Avenir Next",Arial,sans-serif;
+  --gut:clamp(16px,3.4vw,44px);
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer;padding:0}
+img{display:block;max-width:100%}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.skip{position:absolute;left:var(--gut);top:-60px;background:var(--ink);color:var(--bg);padding:8px 14px;z-index:60}
+.skip:focus{top:8px}
+header.top{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:22px var(--gut) 18px;position:relative}
+.logo{font-weight:300;font-size:clamp(14px,2.5vw,31px);letter-spacing:.24em;text-transform:uppercase;line-height:1.15;margin-right:-.24em;text-align:center;white-space:nowrap}
+.menu-btn{display:flex;visibility:hidden;width:44px;height:44px;margin-left:-10px;align-items:center;justify-content:center}
+.menu-btn i,.menu-btn i::before,.menu-btn i::after{display:block;width:22px;height:2px;background:var(--ink);content:"";position:relative}
+.menu-btn i::before{position:absolute;top:-7px}
+.menu-btn i::after{position:absolute;top:7px}
+.top-r{justify-self:end;font-size:13px;letter-spacing:.14em;text-transform:uppercase}
+.top-r a{border-bottom:1px solid var(--accent);padding-bottom:2px}
+.top-r a:hover{color:var(--accent)}
+nav.cats{display:flex;justify-content:center;gap:clamp(14px,2.6vw,38px);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:0 var(--gut);flex-wrap:wrap}
+nav.cats a{font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);padding:13px 0;border-bottom:2px solid transparent;margin-bottom:-1px}
+nav.cats a:hover{color:var(--ink)}
+nav.cats a[aria-current="page"]{color:var(--ink);border-bottom-color:var(--accent)}
+.frame{position:relative;background:var(--panel);display:flex;align-items:center;justify-content:center;aspect-ratio:16/9;overflow:hidden;color:var(--muted);font-size:13px;text-align:center;letter-spacing:.04em}
+.frame .cov{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .6s ease,opacity .4s ease}
+.frame .shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.1) 0%,rgba(0,0,0,0) 38%,rgba(0,0,0,.55) 100%)}
+button.frame:hover .cov,button.frame:focus-visible .cov{transform:scale(1.045)}
+.play{position:relative;width:54px;height:54px;border:1px solid var(--ink);border-radius:50%;display:inline-flex;align-items:center;justify-content:center;color:var(--ink);font-size:16px;padding-left:3px;background:rgba(10,10,12,.72);box-shadow:0 0 0 1px rgba(10,10,12,.3);transition:background .25s,color .25s}
+button.frame:hover .play,button.frame:focus-visible .play{background:var(--ink);color:var(--bg)}
+.dur{position:absolute;right:8px;bottom:8px;background:rgba(0,0,0,.8);color:#fff;font-size:12px;padding:2px 7px;letter-spacing:.04em;font-variant-numeric:tabular-nums}
+button.frame{width:100%;cursor:pointer}
+.hero{position:relative}
+.hero .frame{aspect-ratio:2.37;max-height:78vh;min-height:300px;width:100%}
+.hero .cov,.hero .vid{filter:brightness(.75) saturate(1.05)}
+.hero .shade{background:linear-gradient(180deg,rgba(10,10,12,.4) 0%,rgba(10,10,12,.12) 38%,rgba(10,10,12,.78) 100%)}
+.hero .vid{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);border:0;pointer-events:none;opacity:0;transition:opacity .9s ease}
+.hero .vid.on{opacity:1}
+.hero .over{position:absolute;inset:auto 0 clamp(26px,5.5vh,60px) 0;text-align:center;padding:0 var(--gut);pointer-events:none}
+.hero h1{text-shadow:0 2px 24px rgba(0,0,0,.5);font-weight:600;font-size:clamp(30px,4.6vw,60px);line-height:1.08;margin:0 0 8px;text-wrap:balance}
+.hero p{text-shadow:0 1px 16px rgba(0,0,0,.5);font-weight:300;font-size:clamp(16px,1.7vw,22px);color:#D9D6D0;margin:0 auto;max-width:34em;letter-spacing:.02em}
+.shead{text-align:center;font-weight:300;font-size:clamp(20px,2.4vw,30px);letter-spacing:.3em;text-transform:uppercase;margin:0;padding:64px var(--gut) 8px;text-wrap:balance}
+.sub{text-align:center;color:var(--muted);margin:0 0 32px;font-size:15px}
+.wrap{max-width:1320px;margin:0 auto;padding:0 var(--gut)}
+.railwrap{position:relative;border-bottom:1px solid var(--line);padding-bottom:40px}
+.rail{display:flex;gap:20px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-left:var(--gut);list-style:none;margin:0;padding:8px var(--gut) 4px;scrollbar-width:none}
+.rail::-webkit-scrollbar{display:none}
+.rail li{flex:0 0 clamp(240px,24vw,320px);scroll-snap-align:start;text-align:center}
+.rail .date{display:block;font-size:13px;letter-spacing:.06em;color:var(--muted);margin-bottom:10px}
+.rail h3{font-weight:400;font-size:16px;margin:12px 0 0;line-height:1.35}
+.rail h3 a{border-bottom:1px solid transparent}
+.rail h3 a:hover,.rail h3 a:focus-visible{border-bottom-color:var(--ink)}
+.arrow{position:absolute;top:calc(50% - 10px);width:46px;height:46px;background:rgba(12,12,14,.92);border:1px solid var(--line);font-size:20px;display:flex;align-items:center;justify-content:center;transition:opacity .2s,border-color .2s}
+.arrow.next{right:var(--gut)}
+.arrow.prev{left:var(--gut)}
+.arrow:hover{border-color:var(--ink)}
+.arrow[disabled]{opacity:.25;cursor:default}
+.arrow[disabled]:hover{border-color:var(--line)}
+.three{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:36px 24px;list-style:none;margin:0;padding:0}
+.item h3{font-weight:500;font-size:19px;margin:14px 0 4px;line-height:1.28}
+.item h3 a{border-bottom:1px solid transparent}
+.item h3 a:hover,.item h3 a:focus-visible{border-bottom-color:var(--ink)}
+.item .meta{font-size:13px;letter-spacing:.06em;color:var(--muted);margin:0;text-transform:uppercase}
+.courtesy{color:var(--muted);font-size:14px;letter-spacing:.04em;margin:14px 0 0}
+.more{display:block;text-align:center;margin:36px auto 0;font-size:13px;letter-spacing:.2em;text-transform:uppercase;border-bottom:1px solid var(--accent);padding-bottom:3px;width:max-content}
+.more:hover{color:var(--accent)}
+.sec{padding-bottom:56px;border-bottom:1px solid var(--line)}
+.band{text-align:center;padding:84px var(--gut) 72px}
+.band h2{font-weight:300;font-size:clamp(26px,3.6vw,46px);letter-spacing:.04em;margin:0 0 22px;text-wrap:balance}
+.btn{display:inline-block;border:1px solid var(--ink);padding:12px 30px;font-size:13px;letter-spacing:.2em;text-transform:uppercase;transition:background .25s,color .25s}
+.btn:hover{background:var(--ink);color:var(--bg)}
+.band .meta2{display:block;margin-top:16px;color:var(--muted);font-size:14px}
+footer.foot{border-top:1px solid var(--line);padding:22px var(--gut) 30px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;color:var(--muted);font-size:13px;letter-spacing:.04em}
+footer.foot a:hover{color:var(--ink)}
+.ptitle{text-align:center;padding:56px var(--gut) 8px}
+.ptitle h1{font-weight:300;font-size:clamp(26px,3.6vw,48px);letter-spacing:.3em;text-transform:uppercase;margin:0;text-wrap:balance;line-height:1.15}
+.ptitle p{color:var(--muted);margin:12px auto 0;max-width:34em;font-size:18px;font-weight:300}
+.filters{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin:0 0 36px}
+.filters a{border:1px solid var(--line);padding:7px 20px;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.filters a[aria-current="page"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.proj-top{max-width:1180px;margin:0 auto;padding:28px var(--gut) 0}
+.back{font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+.back:hover{color:var(--ink)}
+.proj{max-width:1180px;margin:0 auto;padding:32px var(--gut) 0;display:grid;grid-template-columns:minmax(0,1.7fr) minmax(0,1fr);gap:56px}
+.proj h1{font-weight:500;font-size:clamp(28px,3.8vw,48px);line-height:1.1;margin:6px 0 16px;text-wrap:balance}
+.proj .lead{font-weight:300;font-size:21px;color:#D9D6D0;margin:0}
+.kicker{color:var(--muted);font-size:13px;letter-spacing:.14em;text-transform:uppercase}
+.data{margin:0;display:grid;grid-template-columns:auto 1fr;gap:12px 22px;align-content:start;border-top:1px solid var(--line);padding-top:20px;font-size:16px}
+.data dt{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);padding-top:4px}
+.data dd{margin:0}
+.watch{display:inline-block;margin-top:22px;cursor:pointer;font-size:13px;letter-spacing:.16em;text-transform:uppercase;border-bottom:1px solid var(--accent);padding-bottom:3px}
+.watch:hover{color:var(--accent)}
+details{margin-top:24px;border-top:1px solid var(--line);padding-top:14px}
+summary{cursor:pointer;color:var(--accent);font-size:14px;letter-spacing:.1em;text-transform:uppercase}
+.pn{max-width:1180px;margin:56px auto 0;padding:20px var(--gut) 0;display:flex;justify-content:space-between;gap:16px;font-size:15px;border-top:1px solid var(--line)}
+.pn a:hover{color:var(--accent)}
+.about{max-width:1100px;margin:24px auto 0;padding:0 var(--gut);display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.5fr);gap:56px}
+.about .frame{aspect-ratio:4/5}
+.about.solo{grid-template-columns:minmax(0,1fr);max-width:860px}
+.about .lead{font-weight:300;font-size:clamp(22px,2.4vw,30px);line-height:1.3;margin:0 0 20px}
+.about p{color:#D4D1CA;max-width:36em}
+.clients{list-style:none;padding:0;margin:20px 0 0;display:flex;flex-wrap:wrap;gap:6px 26px;color:var(--muted);font-size:15px}
+.contact-big{text-align:center;font-weight:300;font-size:clamp(22px,4vw,46px);margin:32px 0 28px;padding:0 var(--gut);word-break:break-word}
+.center{text-align:center}
+.social{display:flex;justify-content:center;gap:26px;flex-wrap:wrap;margin:30px 0 80px;font-size:14px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.social a{border-bottom:1px solid var(--line);padding-bottom:3px}
+.social a:hover{color:var(--ink);border-bottom-color:var(--ink)}
+.view{animation:in .4s ease both}
+@keyframes in{from{opacity:.001}to{opacity:1}}
+dialog.lb{border:0;padding:0;background:transparent;color:var(--ink);width:min(1180px,94vw);max-width:none}
+dialog.lb::backdrop{background:rgba(6,6,8,.95)}
+.lb-bar{display:flex;justify-content:space-between;align-items:center;gap:18px;padding:0 0 12px;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.lb-title{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
+.lb-close{border:1px solid var(--line);padding:9px 18px;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink);flex:0 0 auto}
+.lb-close:hover{border-color:var(--ink)}
+.lb-stage{position:relative;aspect-ratio:16/9;background:#000;overflow:hidden}
+.lb-stage iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.lb-fb{position:absolute;inset:0;display:none;flex-direction:column;align-items:center;justify-content:center;gap:18px;text-align:center;padding:26px;background:var(--panel)}
+.lb-fb.on{display:flex}
+.lb-fb p{margin:0;color:var(--muted);font-size:15px;max-width:30em}
+.mbar{display:none}
+@media(max-width:900px){
+  .three{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .proj{grid-template-columns:1fr;gap:28px}
+  .about{grid-template-columns:1fr;gap:28px}
+  .about .frame{aspect-ratio:3/2}
+}
+@media(max-width:700px){
+  body{padding-bottom:70px}
+  header.top{padding-top:12px;padding-bottom:12px}
+  .menu-btn{visibility:visible}
+  .top-r{display:none}
+  nav.cats{display:none;flex-direction:column;gap:0;position:absolute;left:0;right:0;top:100%;background:var(--bg);z-index:30;padding:0}
+  nav.cats.open{display:flex}
+  nav.cats a{padding:16px var(--gut);border-bottom:1px solid var(--line);margin:0}
+  nav.cats a[aria-current="page"]{border-bottom-color:var(--line);color:var(--accent)}
+  .hero .frame{aspect-ratio:3/4;max-height:72vh;min-height:0}
+  .three{grid-template-columns:1fr}
+  .arrow{display:none}
+  .mbar{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:40;background:#111114;border-top:1px solid var(--line);padding:10px var(--gut);justify-content:space-between;align-items:center;gap:12px;font-size:13px;color:var(--muted)}
+  .mbar .btn{background:var(--ink);color:var(--bg);padding:11px 22px;flex:0 0 auto}
+  .mbar span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  html{scroll-behavior:auto}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Vai al contenuto</a>
+<header class="top">
+  <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="cats" aria-label="Apri il menu"><i></i></button>
+  <a class="logo" href="#home">Salvatore Iannelli</a>
+  <div class="top-r"><a href="#contatti">Contatti</a></div>
+  <nav class="cats" id="cats" aria-label="Principale" style="grid-column:1/-1;margin-top:18px;margin-left:calc(-1*var(--gut));margin-right:calc(-1*var(--gut))">
+    <a href="#lavori" data-r="lavori">Lavori</a>
+    <a href="#brand" data-r="brand">Brand</a>
+    <a href="#editoriali" data-r="editoriali">Editoriali</a>
+    <a href="#documentari" data-r="documentari">Documentari</a>
+    <a href="#chi-sono" data-r="chi-sono">Chi sono</a>
+    <a href="#contatti" data-r="contatti">Contatti</a>
+  </nav>
+</header>
+
+<main id="main" tabindex="-1"></main>
+
+<dialog class="lb" id="lb" aria-labelledby="lbTitle">
+  <div class="lb-bar"><span class="lb-title" id="lbTitle"></span><button class="lb-close" id="lbClose">Chiudi</button></div>
+  <div class="lb-stage" id="lbStage">
+    <div class="lb-fb" id="lbFb">
+      <p>Il video non riesce a partire. Può succedere se la tua rete blocca i lettori esterni: puoi aprirlo direttamente qui sotto.</p>
+      <a class="btn" id="lbLink" href="#" target="_blank" rel="noopener">Apri il video ↗</a>
+    </div>
+  </div>
+</dialog>
+
+<footer class="foot">
+  <span>© 2026 Salvatore Iannelli</span>
+  <span><a href="mailto:salvatoreiannellivideo@gmail.com">salvatoreiannellivideo@gmail.com</a></span>
+</footer>
+
+<div class="mbar" aria-label="Contatto rapido">
+  <span>salvatoreiannellivideo@gmail.com</span>
+  <a class="btn" href="#contatti">Scrivimi</a>
+</div>
+
+
+<script type="application/json" id="data">
+{
+  "reel": {
+    "url": "https://vimeo.com/1236278128?fl=ip&fe=ec",
+    "dur": "1:08",
+    "poster": "img/reel-1920.jpg",
+    "posterSm": "img/reel-960.jpg",
+    "embed": "https://player.vimeo.com/video/1236278128?background=1&autoplay=1&loop=1&muted=1&autopause=0&dnt=1",
+    "ratio": 2.37
+  },
+  "videos": [
+    {
+      "id": 1,
+      "title": "DANIELE ALESSANDRINI — SS26",
+      "year": 2026,
+      "client": "Daniele Alessandrini",
+      "cat": "brand",
+      "dur": "0:53",
+      "url": "https://vimeo.com/1235949277?fl=pl&fe=vl",
+      "host": "Vimeo",
+      "img": "01",
+      "desc": "Spring/Summer 2026 fashion film."
+    },
+    {
+      "id": 2,
+      "title": "ARTIGLI — Spring/Summer 2024 Campaign",
+      "year": 2024,
+      "client": "Artigli",
+      "cat": "brand",
+      "dur": "0:39",
+      "url": "https://vimeo.com/1235943236?fl=ip&fe=ec",
+      "host": "Vimeo",
+      "img": "02",
+      "desc": "Campaign film for ARTIGLI, Spring/Summer 2024 collection.\n\nVideo production, cinematography & post-production."
+    },
+    {
+      "id": 3,
+      "title": "JIVELEY — FW25/26",
+      "year": 2025,
+      "client": "Jiveley",
+      "cat": "brand",
+      "dur": "0:51",
+      "url": "https://vimeo.com/1235941756?fl=ip&fe=ec",
+      "host": "Vimeo",
+      "img": "03",
+      "desc": "Fall/Winter 2025–26 collection film."
+    },
+    {
+      "id": 4,
+      "title": "PATRIÒT — FW24/25",
+      "year": 2024,
+      "client": "Patriòt",
+      "cat": "brand",
+      "dur": "0:48",
+      "url": "https://vimeo.com/1235948839?fl=ip&fe=ec",
+      "host": "Vimeo",
+      "img": "04",
+      "desc": "Fall/Winter 2024–25 collection film."
+    },
+    {
+      "id": 5,
+      "title": "PATRIÒT — SS25",
+      "year": 2025,
+      "client": "Patriòt",
+      "cat": "brand",
+      "dur": "0:39",
+      "url": "https://vimeo.com/1235946696?fl=ip&fe=ec",
+      "host": "Vimeo",
+      "img": "05",
+      "desc": "Spring/Summer 2025 collection film."
+    },
+    {
+      "id": 6,
+      "title": "DANIELE ALESSANDRINI — FW24/25",
+      "year": 2024,
+      "client": "Daniele Alessandrini",
+      "cat": "brand",
+      "dur": "0:48",
+      "url": "https://vimeo.com/1235947771?fl=ip&fe=ec",
+      "host": "Vimeo",
+      "img": "06",
+      "desc": "Fall/Winter 2024–25 fashion film."
+    },
+    {
+      "id": 7,
+      "title": "Preziosa Magazine — Fashion Editorial Film",
+      "year": 2025,
+      "client": "Preziosa Magazine",
+      "cat": "editoriali",
+      "dur": "0:38",
+      "url": "https://vimeo.com/1236248831?fl=pl&fe=sh",
+      "host": "Vimeo",
+      "img": "07",
+      "desc": "Video production for a fashion editorial published by Preziosa Magazine."
+    },
+    {
+      "id": 8,
+      "title": "Evocazione — Spaghettimag",
+      "year": 2024,
+      "client": "Spaghettimag",
+      "cat": "editoriali",
+      "dur": "0:55",
+      "url": "https://vimeo.com/1235945922?fl=pl&fe=sh",
+      "host": "Vimeo",
+      "img": "08",
+      "desc": "Fashion editorial film for Spaghettimag."
+    },
+    {
+      "id": 9,
+      "title": "Alan Charlton and Liam Gillick",
+      "year": 2026,
+      "client": "Alfonso Artiaco Gallery",
+      "cat": "documentari",
+      "dur": "5:57",
+      "url": "https://www.youtube.com/watch?v=U8RSNSZWykA",
+      "host": "YouTube",
+      "img": "09",
+      "courtesy": "Courtesy of Alfonso Artiaco Gallery"
+    },
+    {
+      "id": 10,
+      "title": "Glen Rubsamen, Sorry, Wrong Number",
+      "year": 2026,
+      "client": "Alfonso Artiaco Gallery",
+      "cat": "documentari",
+      "dur": "4:00",
+      "url": "https://www.youtube.com/watch?v=OK50lHSK7H0",
+      "host": "YouTube",
+      "img": "10",
+      "courtesy": "Courtesy of Alfonso Artiaco Gallery"
+    },
+    {
+      "id": 11,
+      "title": "Tornare a SORRIDERE in meno di UN'ORA | Riflessi di felicità EP.01",
+      "year": 2026,
+      "client": "Dental Beauty Clinic",
+      "cat": "documentari",
+      "dur": "5:57",
+      "url": "https://www.youtube.com/watch?v=pVPrLSL7ICM",
+      "host": "YouTube",
+      "img": "11"
+    }
+  ],
+  "bio": {
+    "lead": "Io questo lavoro l’ho voluto sempre. Non è che l’ho scelto: a un certo punto mi sono accorto che non ne stavo scegliendo un altro.",
+    "paras": [
+      "Sto a Napoli, e a Napoli lavoro. Campagne per marchi di moda, film editoriali, documentari. È una città che ti insegna a guardare: dentro un’inquadratura ci sta sempre troppo, e tocca a te decidere che cosa vale.",
+      "La prima parte del lavoro si fa parlando. L’idea c’è quasi sempre; le parole per dirla, non sempre.",
+      "Ed è lì che comincia il mio mestiere: trovare le immagini che prendono il posto delle parole che mancano. Si prova, si sbaglia, si toglie quello che non serve. Quando l’immagine è quella giusta, non c’è più niente da spiegare."
+    ]
+  }
+}
+</script>
+
+<script>
+var D=JSON.parse(document.getElementById("data").textContent);
+var P=D.videos, REEL=D.reel;
+var LABEL={brand:"Brand",editoriali:"Editoriale",documentari:"Documentario"};
+var EMAIL="salvatoreiannellivideo@gmail.com";
+var IG="https://www.instagram.com/salvatore.iannelli/";
+var LI="https://www.linkedin.com/in/salvatore-iannelli-video/";
+var main=document.getElementById("main");
+
+function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}
+function cover(p,sizes,eager){
+  var a="img/cover-"+p.img+"-640.jpg",b="img/cover-"+p.img+"-1280.jpg";
+  return '<img class="cov" src="'+(eager?b:a)+'" srcset="'+a+' 640w, '+b+' 1280w" sizes="'+sizes+'" alt="Fotogramma da '+esc(p.title)+'"'+(eager?'':' loading="lazy"')+' decoding="async">';
+}
+var SZ_CARD="(max-width:700px) 92vw, (max-width:900px) 46vw, 31vw";
+var SZ_BIG="(max-width:1180px) 100vw, 1180px";
+function thumb(p){
+  return '<button class="frame" data-play="'+p.id+'" aria-label="Riproduci '+esc(p.title)+', '+p.dur+'">'+
+    cover(p,SZ_CARD)+'<span class="shade"></span><span class="play" aria-hidden="true">▶</span><span class="dur">'+p.dur+'</span></button>';
+}
+function railItem(p){
+  return '<li class="item"><span class="date">'+p.year+'</span>'+thumb(p)+
+    '<h3><a href="#progetto-'+p.id+'">'+esc(p.title)+'</a></h3></li>';
+}
+function card(p){
+  return '<li class="item">'+thumb(p)+
+    '<h3><a href="#progetto-'+p.id+'">'+esc(p.title)+'</a></h3>'+
+    '<p class="meta">'+LABEL[p.cat]+' · '+p.year+'</p></li>';
+}
+function descHtml(p){
+  if(!p.desc)return '';
+  return p.desc.split(/\n{2,}/).map(function(t,i){
+    return '<p class="'+(i===0?'lead':'')+'" style="'+(i?'color:var(--muted);font-size:16px;margin-top:14px':'')+'">'+esc(t.replace(/\n/g," "))+'</p>';
+  }).join("");
+}
+function band(){
+  return '<section class="band" aria-labelledby="bt"><h2 id="bt">Raccontami il tuo progetto</h2><a class="btn" href="#contatti">Scrivimi</a><span class="meta2">'+EMAIL+'</span></section>';
+}
+function by(c){return P.filter(function(p){return p.cat===c});}
+function recent(){return P.slice().sort(function(a,b){
+  var ha=a.host==="YouTube"?1:0,hb=b.host==="YouTube"?1:0;
+  return ha-hb||b.year-a.year||a.id-b.id;
+});}
+
+function home(){
+  return '<section class="hero"><div class="frame" id="heroFrame">'+
+    '<img class="cov" src="'+REEL.poster+'" srcset="'+REEL.posterSm+' 960w, '+REEL.poster+' 1920w" sizes="100vw" alt="" fetchpriority="high" decoding="async">'+
+    '<span class="shade"></span></div>'+
+    '<div class="over"><h1>Salvatore Iannelli</h1><p>Filmmaker e video editor</p></div></section>'+
+    '<section class="railwrap" aria-labelledby="ul"><h2 class="shead" id="ul">Ultimi lavori</h2><div style="height:24px"></div>'+
+    '<ul class="rail" id="rail">'+recent().map(railItem).join("")+'</ul>'+
+    '<button class="arrow prev" id="railPrev" aria-label="Lavori precedenti">‹</button>'+
+    '<button class="arrow next" id="railNext" aria-label="Lavori successivi">›</button></section>'+
+    '<div class="wrap">'+
+    '<section class="sec" aria-labelledby="sb"><h2 class="shead" id="sb">Brand</h2><div style="height:24px"></div><ul class="three">'+by("brand").slice(0,3).map(card).join("")+'</ul><a class="more" href="#brand">Vedi tutti i brand</a></section>'+
+    '<section class="sec" aria-labelledby="se"><h2 class="shead" id="se">Editoriali</h2><div style="height:24px"></div><ul class="three">'+by("editoriali").map(card).join("")+'</ul><a class="more" href="#editoriali">Vedi tutti gli editoriali</a></section>'+
+    '<section class="sec" aria-labelledby="sd"><h2 class="shead" id="sd">Documentari</h2><div style="height:24px"></div><ul class="three">'+by("documentari").slice(0,3).map(card).join("")+'</ul><a class="more" href="#documentari">Vedi tutti i documentari</a></section>'+
+    '</div>'+band();
+}
+function listing(key,title){
+  var list=key==="lavori"?recent():by(key);
+  var tabs=[["lavori","Tutti"],["brand","Brand"],["editoriali","Editoriali"],["documentari","Documentari"]];
+  var f='<div class="filters" role="navigation" aria-label="Filtra per tipo">'+tabs.map(function(t){
+    return '<a href="#'+t[0]+'"'+(key===t[0]?' aria-current="page"':'')+'>'+t[1]+'</a>';
+  }).join("")+'</div>';
+  return '<div class="ptitle"><h1 tabindex="-1" data-h>'+title+'</h1></div><div class="wrap" style="padding-top:36px">'+f+'<ul class="three">'+list.map(card).join("")+'</ul></div>'+band();
+}
+function progetto(id){
+  var i=-1;
+  P.forEach(function(p,k){if(p.id===id)i=k;});
+  if(i<0)return home();
+  var p=P[i],prev=P[(i-1+P.length)%P.length],next=P[(i+1)%P.length];
+  return '<div class="proj-top"><a class="back" href="#lavori">← Tutti i lavori</a></div>'+
+    '<div style="max-width:1180px;margin:20px auto 0;padding:0 var(--gut)"><button class="frame" data-play="'+p.id+'" aria-label="Riproduci '+esc(p.title)+', '+p.dur+'">'+
+    cover(p,SZ_BIG,1)+'<span class="shade"></span><span class="play" aria-hidden="true">▶</span><span class="dur">'+p.dur+'</span></button></div>'+
+    (p.courtesy?'<div style="max-width:1180px;margin:0 auto;padding:0 var(--gut)"><p class="courtesy">'+esc(p.courtesy)+'</p></div>':'')+
+    '<div class="proj"><div><span class="kicker">'+LABEL[p.cat]+' · '+p.year+'</span><h1 tabindex="-1" data-h>'+esc(p.title)+'</h1>'+
+    descHtml(p)+
+    '<button class="watch" data-play="'+p.id+'">Guarda il video ▸</button></div>'+
+    '<dl class="data"><dt>Cliente</dt><dd>'+esc(p.client)+'</dd><dt>Anno</dt><dd>'+p.year+'</dd><dt>Durata</dt><dd>'+p.dur+'</dd></dl></div>'+
+    '<nav class="pn" aria-label="Altri progetti"><a href="#progetto-'+prev.id+'">← '+esc(prev.title)+'</a><a href="#progetto-'+next.id+'">'+esc(next.title)+' →</a></nav>'+band();
+}
+function chi(){
+  return '<div class="ptitle"><h1 tabindex="-1" data-h>Chi sono</h1></div>'+
+    '<div class="about solo" style="margin-top:40px"><div>'+
+    '<p class="lead">'+esc(D.bio.lead)+'</p>'+
+    D.bio.paras.map(function(t){return '<p>'+esc(t)+'</p>';}).join("")+
+    '</div></div>'+band();
+}
+function contatti(){
+  return '<div class="ptitle"><h1 tabindex="-1" data-h>Contatti</h1><p>Raccontami il progetto: obiettivo, tempi, dove andrà il video.</p></div>'+
+    '<p class="contact-big">'+EMAIL+'</p><div class="center"><a class="btn" href="mailto:'+EMAIL+'">Scrivimi</a></div>'+
+    '<div class="social"><a href="'+IG+'" target="_blank" rel="noopener">Instagram ↗</a><a href="'+LI+'" target="_blank" rel="noopener">LinkedIn ↗</a></div>';
+}
+
+function route(){
+  var h=(location.hash||"#home").slice(1);
+  var m=/^progetto-(\d+)$/.exec(h);
+  var html,title,name=h;
+  if(m){var pid=parseInt(m[1],10);html=progetto(pid);var pp=P.filter(function(x){return x.id===pid})[0];title=pp?pp.title:"Progetto";name="lavori";}
+  else if(h==="lavori"){html=listing("lavori","Lavori");title="Lavori";}
+  else if(h==="brand"){html=listing("brand","Brand");title="Brand";}
+  else if(h==="editoriali"){html=listing("editoriali","Editoriali");title="Editoriali";}
+  else if(h==="documentari"){html=listing("documentari","Documentari");title="Documentari";}
+  else if(h==="chi-sono"){html=chi();title="Chi sono";}
+  else if(h==="contatti"){html=contatti();title="Contatti";}
+  else{html=home();title="Filmmaker e video editor";name="home";}
+  main.innerHTML='<div class="view">'+html+'</div>';
+  document.title="Salvatore Iannelli — "+title;
+  document.querySelectorAll("nav.cats a").forEach(function(a){
+    if(a.getAttribute("data-r")===name)a.setAttribute("aria-current","page");else a.removeAttribute("aria-current");
+  });
+  document.getElementById("cats").classList.remove("open");
+  document.getElementById("menuBtn").setAttribute("aria-expanded","false");
+  window.scrollTo(0,0);
+  var hd=main.querySelector("[data-h]");
+  if(hd&&window.__navd){hd.focus({preventScroll:true});}
+  window.__navd=true;
+  initRail();
+  heroVideo();
+}
+document.addEventListener("error",function(e){
+  var t=e.target;
+  if(t&&t.tagName==="IMG"&&t.classList.contains("cov")){
+    var fb=t.getAttribute("data-fb");
+    if(fb&&t.src!==fb){t.src=fb;t.removeAttribute("data-fb");}
+    else{t.remove();}
+  }
+},true);
+window.addEventListener("hashchange",route);
+route();
+
+main.addEventListener("click",function(e){
+  var a=e.target.closest(".arrow");
+  if(a){
+    var r=document.getElementById("rail");
+    if(!r)return;
+    var d=a.id==="railPrev"?-1:1;
+    r.scrollBy({left:d*r.clientWidth*0.8,behavior:"smooth"});
+    return;
+  }
+  var pl=e.target.closest("[data-play]");
+  if(pl){openLb(parseInt(pl.getAttribute("data-play"),10),pl);}
+});
+
+function initRail(){
+  var r=document.getElementById("rail");
+  if(!r)return;
+  var prev=document.getElementById("railPrev"),next=document.getElementById("railNext");
+  function upd(){
+    var max=r.scrollWidth-r.clientWidth;
+    prev.disabled=r.scrollLeft<=4;
+    next.disabled=r.scrollLeft>=max-4;
+  }
+  r.addEventListener("scroll",upd,{passive:true});
+  upd();
+}
+
+var lb=document.getElementById("lb"),lbStage=document.getElementById("lbStage"),
+    lbFb=document.getElementById("lbFb"),lbLink=document.getElementById("lbLink"),
+    lbTitleEl=document.getElementById("lbTitle"),lbTimer=null,lbOpener=null;
+
+function embedUrl(p){
+  var m;
+  if(p.host==="Vimeo"){
+    m=p.url.match(/vimeo\.com\/(\d+)/);
+    return m?"https://player.vimeo.com/video/"+m[1]+"?autoplay=1&dnt=1&title=0&byline=0&portrait=0&playsinline=1":null;
+  }
+  m=p.url.match(/[?&]v=([\w-]+)/);
+  return m?"https://www.youtube-nocookie.com/embed/"+m[1]+"?autoplay=1&rel=0&modestbranding=1&playsinline=1&enablejsapi=1":null;
+}
+function openLb(id,opener){
+  var p=P.filter(function(x){return x.id===id})[0];
+  if(!p)return;
+  var url=embedUrl(p);
+  lbOpener=opener||null;
+  lbTitleEl.textContent=p.title+" · "+p.dur+(p.courtesy?" · "+p.courtesy:"");
+  lbLink.href=p.url;
+  lbLink.textContent="Apri su "+p.host+" ↗";
+  lbFb.classList.remove("on");
+  var old=lbStage.querySelector("iframe");
+  if(old)old.remove();
+  if(url){
+    var f=document.createElement("iframe");
+    f.setAttribute("allow","autoplay; fullscreen; picture-in-picture");
+    f.setAttribute("allowfullscreen","");
+    f.setAttribute("referrerpolicy","strict-origin-when-cross-origin");
+    f.title=p.title;
+    f.src=url;
+    lbStage.insertBefore(f,lbFb);
+    clearTimeout(lbTimer);
+    lbTimer=setTimeout(function(){lbFb.classList.add("on");},3000);
+  }else{
+    lbFb.classList.add("on");
+  }
+  if(lb.showModal&&!lb.open)lb.showModal();
+  document.getElementById("lbClose").focus();
+}
+function closeLb(){
+  clearTimeout(lbTimer);
+  var f=lbStage.querySelector("iframe");
+  if(f)f.remove();
+  lbFb.classList.remove("on");
+  if(lb.open)lb.close();
+}
+document.getElementById("lbClose").addEventListener("click",closeLb);
+lb.addEventListener("click",function(e){if(e.target===lb)closeLb();});
+lb.addEventListener("close",function(){
+  clearTimeout(lbTimer);
+  var f=lbStage.querySelector("iframe");
+  if(f)f.remove();
+  if(lbOpener&&document.contains(lbOpener)){lbOpener.focus();}
+  lbOpener=null;
+});
+document.getElementById("menuBtn").addEventListener("click",function(){
+  var n=document.getElementById("cats"),o=n.classList.toggle("open");
+  this.setAttribute("aria-expanded",String(o));
+  this.setAttribute("aria-label",o?"Chiudi il menu":"Apri il menu");
+});
+function heroVideo(){
+  var f=document.getElementById("heroFrame");
+  if(!f)return;
+  if(window.matchMedia("(prefers-reduced-motion: reduce)").matches)return;
+  var v=f.querySelector(".vid");
+  if(!v){
+    v=document.createElement("iframe");
+    v.className="vid";
+    v.title="Showreel di Salvatore Iannelli, senza audio";
+    v.setAttribute("tabindex","-1");
+    v.setAttribute("aria-hidden","true");
+    v.setAttribute("allow","autoplay");
+    v.setAttribute("referrerpolicy","strict-origin-when-cross-origin");
+    v.addEventListener("load",function(){
+      try{v.contentWindow.postMessage(JSON.stringify({method:"addEventListener",value:"play"}),"https://player.vimeo.com");}catch(err){}
+    });
+    v.src=REEL.embed;
+    f.appendChild(v);
+  }
+  var w=f.clientWidth,h=f.clientHeight,r=REEL.ratio;
+  if(w/h<r){v.style.height=h+"px";v.style.width=Math.ceil(h*r)+"px";}
+  else{v.style.width=w+"px";v.style.height=Math.ceil(w/r)+"px";}
+}
+window.addEventListener("message",function(e){
+  if(e.origin==="https://player.vimeo.com"||e.origin==="https://www.youtube-nocookie.com"){
+    if(lbStage.querySelector("iframe")){clearTimeout(lbTimer);lbFb.classList.remove("on");}
+  }
+  if(e.origin!=="https://player.vimeo.com")return;
+  var d=e.data;
+  try{if(typeof d==="string")d=JSON.parse(d);}catch(err){return;}
+  if(d&&(d.event==="play"||d.event==="playing")){
+    var v=document.querySelector(".hero .vid");
+    if(v)v.classList.add("on");
+  }
+});
+var heroT;
+window.addEventListener("resize",function(){clearTimeout(heroT);heroT=setTimeout(heroVideo,180);});
+heroVideo();
+</script>
+</body>
+</html>
