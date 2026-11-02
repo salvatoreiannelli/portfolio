@@ -610,9 +610,11 @@ function heroVideo(){
     v.setAttribute("referrerpolicy","strict-origin-when-cross-origin");
     v.addEventListener("load",function(){
       try{v.contentWindow.postMessage(JSON.stringify({method:"addEventListener",value:"play"}),"https://player.vimeo.com");}catch(err){}
+      setTimeout(function(){v.classList.add("on");},500);
     });
     v.src=REEL.embed;
     f.appendChild(v);
+    heroWatch();
   }
   var w=f.clientWidth,h=f.clientHeight,r=REEL.ratio;
   if(w/h<r){v.style.height=h+"px";v.style.width=Math.ceil(h*r)+"px";}
@@ -630,6 +632,18 @@ window.addEventListener("message",function(e){
     if(v)v.classList.add("on");
   }
 });
+var heroTimer;
+function heroWatch(){
+  if(heroTimer)return;
+  heroTimer=setInterval(function(){
+    var v=document.querySelector(".hero .vid");
+    if(!v||!v.contentWindow){clearInterval(heroTimer);heroTimer=null;return;}
+    if(document.hidden)return;
+    var r=v.getBoundingClientRect();
+    if(r.bottom<=0||r.top>=innerHeight)return;
+    try{v.contentWindow.postMessage(JSON.stringify({method:"play"}),"https://player.vimeo.com");}catch(e){}
+  },4000);
+}
 var heroT;
 window.addEventListener("resize",function(){clearTimeout(heroT);heroT=setTimeout(heroVideo,180);});
 heroVideo();
