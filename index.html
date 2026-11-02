@@ -151,9 +151,9 @@ dialog.lb::backdrop{background:rgba(6,6,8,.95)}
 .lb-close:hover{border-color:var(--ink)}
 .lb-stage{position:relative;aspect-ratio:16/9;background:#000;overflow:hidden}
 .lb-stage iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
-.lb-fb{position:absolute;inset:0;display:none;flex-direction:column;align-items:center;justify-content:center;gap:18px;text-align:center;padding:26px;background:var(--panel)}
-.lb-fb.on{display:flex}
-.lb-fb p{margin:0;color:var(--muted);font-size:15px;max-width:30em}
+.lb-actions{display:flex;align-items:center;gap:18px;flex:0 0 auto}
+.lb-ext{font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);border-bottom:1px solid transparent;padding-bottom:2px}
+.lb-ext:hover{color:var(--ink);border-bottom-color:var(--ink)}
 .mbar{display:none}
 @media(max-width:900px){
   .three{grid-template-columns:repeat(2,minmax(0,1fr))}
@@ -202,13 +202,14 @@ dialog.lb::backdrop{background:rgba(6,6,8,.95)}
 <main id="main" tabindex="-1"></main>
 
 <dialog class="lb" id="lb" aria-labelledby="lbTitle">
-  <div class="lb-bar"><span class="lb-title" id="lbTitle"></span><button class="lb-close" id="lbClose">Chiudi</button></div>
-  <div class="lb-stage" id="lbStage">
-    <div class="lb-fb" id="lbFb">
-      <p>Il video non riesce a partire. Può succedere se la tua rete blocca i lettori esterni: puoi aprirlo direttamente qui sotto.</p>
-      <a class="btn" id="lbLink" href="#" target="_blank" rel="noopener">Apri il video ↗</a>
-    </div>
+  <div class="lb-bar">
+    <span class="lb-title" id="lbTitle"></span>
+    <span class="lb-actions">
+      <a class="lb-ext" id="lbLink" href="#" target="_blank" rel="noopener">Apri ↗</a>
+      <button class="lb-close" id="lbClose">Chiudi</button>
+    </span>
   </div>
+  <div class="lb-stage" id="lbStage"></div>
 </dialog>
 
 <footer class="foot">
@@ -535,8 +536,8 @@ function initRail(){
 }
 
 var lb=document.getElementById("lb"),lbStage=document.getElementById("lbStage"),
-    lbFb=document.getElementById("lbFb"),lbLink=document.getElementById("lbLink"),
-    lbTitleEl=document.getElementById("lbTitle"),lbTimer=null,lbOpener=null;
+    lbLink=document.getElementById("lbLink"),
+    lbTitleEl=document.getElementById("lbTitle"),lbOpener=null;
 
 function embedUrl(p){
   var m;
@@ -555,7 +556,6 @@ function openLb(id,opener){
   lbTitleEl.textContent=p.title+" · "+p.dur+(p.courtesy?" · "+p.courtesy:"");
   lbLink.href=p.url;
   lbLink.textContent="Apri su "+p.host+" ↗";
-  lbFb.classList.remove("on");
   var old=lbStage.querySelector("iframe");
   if(old)old.remove();
   if(url){
@@ -565,26 +565,19 @@ function openLb(id,opener){
     f.setAttribute("referrerpolicy","strict-origin-when-cross-origin");
     f.title=p.title;
     f.src=url;
-    lbStage.insertBefore(f,lbFb);
-    clearTimeout(lbTimer);
-    lbTimer=setTimeout(function(){lbFb.classList.add("on");},3000);
-  }else{
-    lbFb.classList.add("on");
+    lbStage.appendChild(f);
   }
   if(lb.showModal&&!lb.open)lb.showModal();
   document.getElementById("lbClose").focus();
 }
 function closeLb(){
-  clearTimeout(lbTimer);
   var f=lbStage.querySelector("iframe");
   if(f)f.remove();
-  lbFb.classList.remove("on");
   if(lb.open)lb.close();
 }
 document.getElementById("lbClose").addEventListener("click",closeLb);
 lb.addEventListener("click",function(e){if(e.target===lb)closeLb();});
 lb.addEventListener("close",function(){
-  clearTimeout(lbTimer);
   var f=lbStage.querySelector("iframe");
   if(f)f.remove();
   if(lbOpener&&document.contains(lbOpener)){lbOpener.focus();}
@@ -621,9 +614,6 @@ function heroVideo(){
   else{v.style.width=w+"px";v.style.height=Math.ceil(w/r)+"px";}
 }
 window.addEventListener("message",function(e){
-  if(e.origin==="https://player.vimeo.com"||e.origin==="https://www.youtube-nocookie.com"){
-    if(lbStage.querySelector("iframe")){clearTimeout(lbTimer);lbFb.classList.remove("on");}
-  }
   if(e.origin!=="https://player.vimeo.com")return;
   var d=e.data;
   try{if(typeof d==="string")d=JSON.parse(d);}catch(err){return;}
