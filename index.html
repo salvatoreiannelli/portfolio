@@ -506,6 +506,28 @@ document.addEventListener("error",function(e){
     else{t.remove();}
   }
 },true);
+/* Scrivimi: su computer apre Gmail in una nuova scheda (molti computer non hanno
+   un programma di posta e mailto: non farebbe nulla); su telefono e tablet resta
+   mailto: e si apre l'app di posta. Anche il pulsante fisso in basso su telefono,
+   quando si è già in Contatti, apre direttamente la mail invece di restare fermo. */
+var DESKTOP=window.matchMedia("(hover:hover) and (pointer:fine)");
+document.addEventListener("click",function(e){
+  if(e.defaultPrevented||e.button||e.metaKey||e.ctrlKey||e.shiftKey||e.altKey)return;
+  var a=e.target.closest&&e.target.closest("a");
+  if(!a)return;
+  var href=a.getAttribute("href")||"";
+  var isMail=href.indexOf("mailto:")===0;
+  var isBarOnContacts=!!a.closest(".mbar")&&location.hash==="#contatti";
+  if(!isMail&&!isBarOnContacts)return;
+  e.preventDefault();
+  var to=isMail?decodeURIComponent(href.slice(7).split("?")[0]):EMAIL;
+  if(DESKTOP.matches){
+    window.open("https://mail.google.com/mail/?view=cm&fs=1&to="+encodeURIComponent(to),"_blank","noopener");
+  }else{
+    location.href="mailto:"+to;
+  }
+});
+
 window.addEventListener("hashchange",route);
 route();
 
