@@ -62,7 +62,8 @@ nav.cats a[aria-current="page"]{color:var(--ink);border-bottom-color:var(--accen
 .frame .cov{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .6s ease,opacity .4s ease}
 .frame .shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.1) 0%,rgba(0,0,0,0) 38%,rgba(0,0,0,.55) 100%)}
 button.frame:hover .cov,button.frame:focus-visible .cov{transform:scale(1.045)}
-.play{position:relative;width:54px;height:54px;border:1px solid var(--ink);border-radius:50%;display:inline-flex;align-items:center;justify-content:center;color:var(--ink);font-size:16px;padding-left:3px;background:rgba(10,10,12,.72);box-shadow:0 0 0 1px rgba(10,10,12,.3);transition:background .25s,color .25s}
+.play{position:relative;width:54px;height:54px;border:1px solid var(--ink);border-radius:50%;display:inline-flex;align-items:center;justify-content:center;color:var(--ink);background:rgba(10,10,12,.72);box-shadow:0 0 0 1px rgba(10,10,12,.3);transition:background .25s,color .25s}
+.play::before{content:"";display:block;margin-left:3px;border-style:solid;border-width:8px 0 8px 13px;border-color:transparent transparent transparent currentColor}
 button.frame:hover .play,button.frame:focus-visible .play{background:var(--ink);color:var(--bg)}
 .dur{position:absolute;right:8px;bottom:8px;background:rgba(0,0,0,.8);color:#fff;font-size:12px;padding:2px 7px;letter-spacing:.04em;font-variant-numeric:tabular-nums}
 button.frame{width:100%;cursor:pointer}
@@ -153,6 +154,7 @@ dialog.lb::backdrop{background:rgba(6,6,8,.95)}
 .lb-stage iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
 .lb-actions{display:flex;align-items:center;gap:18px;flex:0 0 auto}
 .lb-ext{font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);border-bottom:1px solid transparent;padding-bottom:2px}
+.ext::after{content:"";display:inline-block;width:7px;height:7px;margin-left:8px;border-top:1.5px solid currentColor;border-right:1.5px solid currentColor;transform:rotate(45deg);vertical-align:2px}
 .lb-ext:hover{color:var(--ink);border-bottom-color:var(--ink)}
 .mbar{display:none}
 @media(max-width:900px){
@@ -205,7 +207,7 @@ dialog.lb::backdrop{background:rgba(6,6,8,.95)}
   <div class="lb-bar">
     <span class="lb-title" id="lbTitle"></span>
     <span class="lb-actions">
-      <a class="lb-ext" id="lbLink" href="#" target="_blank" rel="noopener">Apri ↗</a>
+      <a class="lb-ext ext" id="lbLink" href="#" target="_blank" rel="noopener">Apri</a>
       <button class="lb-close" id="lbClose">Chiudi</button>
     </span>
   </div>
@@ -395,7 +397,7 @@ var SZ_CARD="(max-width:700px) 92vw, (max-width:900px) 46vw, 31vw";
 var SZ_BIG="(max-width:1180px) 100vw, 1180px";
 function thumb(p){
   return '<button class="frame" data-play="'+p.id+'" aria-label="Riproduci '+esc(p.title)+', '+p.dur+'">'+
-    cover(p,SZ_CARD)+'<span class="shade"></span><span class="play" aria-hidden="true">▶</span><span class="dur">'+p.dur+'</span></button>';
+    cover(p,SZ_CARD)+'<span class="shade"></span><span class="play" aria-hidden="true"></span><span class="dur">'+p.dur+'</span></button>';
 }
 function railItem(p){
   return '<li class="item"><span class="date">'+p.year+'</span>'+thumb(p)+
@@ -451,7 +453,7 @@ function progetto(id){
   var p=P[i],prev=P[(i-1+P.length)%P.length],next=P[(i+1)%P.length];
   return '<div class="proj-top"><a class="back" href="#lavori">← Tutti i lavori</a></div>'+
     '<div style="max-width:1180px;margin:20px auto 0;padding:0 var(--gut)"><button class="frame" data-play="'+p.id+'" aria-label="Riproduci '+esc(p.title)+', '+p.dur+'">'+
-    cover(p,SZ_BIG,1)+'<span class="shade"></span><span class="play" aria-hidden="true">▶</span><span class="dur">'+p.dur+'</span></button></div>'+
+    cover(p,SZ_BIG,1)+'<span class="shade"></span><span class="play" aria-hidden="true"></span><span class="dur">'+p.dur+'</span></button></div>'+
     (p.courtesy?'<div style="max-width:1180px;margin:0 auto;padding:0 var(--gut)"><p class="courtesy">'+esc(p.courtesy)+'</p></div>':'')+
     '<div class="proj"><div><span class="kicker">'+LABEL[p.cat]+' · '+p.year+'</span><h1 tabindex="-1" data-h>'+esc(p.title)+'</h1>'+
     descHtml(p)+
@@ -469,7 +471,7 @@ function chi(){
 function contatti(){
   return '<div class="ptitle"><h1 tabindex="-1" data-h>Contatti</h1><p>Raccontami il progetto: obiettivo, tempi, dove andrà il video.</p></div>'+
     '<p class="contact-big">'+EMAIL+'</p><div class="center"><a class="btn" href="mailto:'+EMAIL+'">Scrivimi</a></div>'+
-    '<div class="social"><a href="'+IG+'" target="_blank" rel="noopener">Instagram ↗</a><a href="'+LI+'" target="_blank" rel="noopener">LinkedIn ↗</a></div>';
+    '<div class="social"><a class="ext" href="'+IG+'" target="_blank" rel="noopener">Instagram</a><a class="ext" href="'+LI+'" target="_blank" rel="noopener">LinkedIn</a></div>';
 }
 
 function route(){
@@ -577,7 +579,7 @@ function openLb(id,opener){
   lbOpener=opener||null;
   lbTitleEl.textContent=p.title+" · "+p.dur+(p.courtesy?" · "+p.courtesy:"");
   lbLink.href=p.url;
-  lbLink.textContent="Apri su "+p.host+" ↗";
+  lbLink.textContent="Apri su "+p.host;
   var old=lbStage.querySelector("iframe");
   if(old)old.remove();
   if(url){
