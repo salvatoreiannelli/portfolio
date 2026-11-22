@@ -662,6 +662,21 @@ var heroT;
 window.addEventListener("resize",function(){clearTimeout(heroT);heroT=setTimeout(heroVideo,180);});
 heroVideo();
 </script>
-<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "b0c970df47af48dab175681d08ce0963"}'></script><!-- End Cloudflare Web Analytics -->
+<!-- Cloudflare Web Analytics. Le visite del proprietario non vengono contate: aprendo il sito con ?notrack=1 il browser ricorda di non contare (?notrack=0 per annullare). -->
+<script>
+(function(){
+  try{
+    if(/[?&]notrack=1/.test(location.search))localStorage.setItem("noTrack","1");
+    if(/[?&]notrack=0/.test(location.search))localStorage.removeItem("noTrack");
+    if(localStorage.getItem("noTrack")==="1")return;
+  }catch(e){}
+  var s=document.createElement("script");
+  s.type="module";
+  s.src="https://static.cloudflareinsights.com/beacon.min.js";
+  s.setAttribute("data-cf-beacon",'{"token": "b0c970df47af48dab175681d08ce0963"}');
+  document.body.appendChild(s);
+})();
+</script>
+<!-- End Cloudflare Web Analytics -->
 </body>
 </html>
